@@ -1,6 +1,5 @@
 #ifndef REDIS_KILLER_COMMON_H
 #define REDIS_KILLER_COMMON_H
-#include <functional>
 #include <map>
 #include <string>
 
