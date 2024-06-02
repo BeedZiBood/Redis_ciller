@@ -13,12 +13,20 @@ namespace common
   {
     std::string put(std::string& line, std::map< std::string, std::string >& store)
     {
-      std::string key, value;
+      std::string key, value, answer = "";
       key = get_word(line);
       value = get_word(line);
+      if (store.find(key) != store.end())
+      {
+        answer = "OK " + store[key];
+      }
+      else
+      {
+        answer = "OK";
+      }
       store[key] = value;
       BOOST_LOG_TRIVIAL(info) << "PUT key: '" << key << "' value: '" << value << "'";
-      return "OK";
+      return answer;
     }
 
     std::string get(std::string& line, std::map< std::string, std::string >& store)
@@ -48,15 +56,16 @@ namespace common
       }
       else
       {
+        std::string answer = store[key];
         store.erase(key);
         BOOST_LOG_TRIVIAL(info) << "DEL key: '" << key << "'";
-        return "OK";
+        return "OK " + answer;
       }
     }
 
     std::string count(std::string& line, std::map< std::string, std::string >& store)
     {
-      return std::to_string(store.size());
+      return "OK " + std::to_string(store.size());
     }
   }
 
